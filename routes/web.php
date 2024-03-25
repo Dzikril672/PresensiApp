@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PresensiController;
+use App\Models\Karyawan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,9 +17,21 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('auth.login');
+//Session untuk login
+Route::middleware(['guest:karyawan']) -> group(function () {
+    Route::get('/', function () {
+        return view('auth.login');
+    })->name('login');
+    
+    Route::post('/loginrequest', [AuthController::class, 'loginrequest']);
 });
 
-Route::get('/dashboard', [DashboardController::class, 'home']);
-Route::post('/loginrequest', [AuthController::class, 'loginrequest']);
+//Session agar tetap login
+Route::middleware(['auth:karyawan'])-> group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'home']);
+    Route::get('/logoutrequest', [AuthController::class,'logoutrequest']);
+
+    //presensi
+    Route::get('/presensi/create', [PresensiController::class,'create']);
+});
+
