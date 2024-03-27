@@ -16,13 +16,38 @@ class DashboardController extends Controller
         $presensiHariIni = DB::table('presensi')->where('nik', $nik)->where('tgl_presensi', $hariIni)->first();
 
         //mengambil data bulanan untuk rekap
-        $bulanIni = date("m");
+        $bulanIni = date("m") * 1; //mengambil data bulan berjalan agar dapat dibaca data nama bulan (dalam bentuk angka)
         $tahunIni = date("Y");
-        $historiBulanIni = DB::table('presensi')->whereRaw('MONTH(tgl_presensi)="'.$bulanIni.'"')
+        $historiBulanIni = DB::table('presensi')
+            ->where('nik', $nik)
+            ->whereRaw('MONTH(tgl_presensi)="'.$bulanIni.'"')
             ->whereRaw('YEAR(tgl_presensi)="'.$tahunIni.'"')
             ->orderBy('tgl_presensi')
             ->get();
-
-        return view('dashboard.dashboard', compact('presensiHariIni', 'historiBulanIni'));
+        
+        //mengganti data bulan (angka) menjadi nama bulan
+        $namaBulan = [
+            "",
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember"];
+        
+        $rekapPresensi = DB::table('presensi')
+        ->selectRaw('COUNT(nik) as jmlhadir')
+        ->where('nik', $nik)
+        ->whereRaw('MONTH(tgl_presensi)="'.$bulanIni.'"')
+        ->whereRaw('YEAR(tgl_presensi)="'.$tahunIni.'"')
+        ->first();
+        
+        return view('dashboard.dashboard', compact('presensiHariIni', 'historiBulanIni', 'namaBulan', 'bulanIni', 'tahunIni', ));
     }
 }

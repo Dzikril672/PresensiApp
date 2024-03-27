@@ -121,13 +121,13 @@
             
             //mengatur titik koordinat kantor dan radiusnya
             var circle = L.circle([
-                -6.234756399995916, 
-                106.82148599999596], 
+                -6.180005585927644, 
+                106.70907087198061], 
             {
                 color: 'blue',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: 30 //mengatur jarak radius lingkaran
+                radius: 60 //mengatur jarak radius lingkaran
             }).addTo(map);
         }
 

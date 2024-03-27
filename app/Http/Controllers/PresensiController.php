@@ -33,8 +33,8 @@ class PresensiController extends Controller
         $lokasiBagi = explode(",", $lokasi); //membagi lat dan long lokasi user
         $latUser = $lokasiBagi[0];
         $lonUser = $lokasiBagi[1];
-        $latKantor = -6.234756399995916;
-        $lonKantor = 106.82148599999596;
+        $latKantor = -6.180005585927644;
+        $lonKantor = 106.70907087198061;
 
         //proses menghitung jarak
         $jarak = $this -> distance($latKantor, $lonKantor, $latUser, $lonUser);
@@ -57,7 +57,7 @@ class PresensiController extends Controller
         $file = $folderPath . $fileName; //url file yang akan diupload
 
         //proses untuk data yang akan dikirim ketika absen pulang (update)
-        if($radius > 30){
+        if($radius > 60){
             echo "error|Maaf Anda Berada Di Luar Radius \n Jarak Anda " .$radius." meter dari kantor|radius";
         } else{
             if($cek > 0){

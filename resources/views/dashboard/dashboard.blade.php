@@ -100,6 +100,55 @@
                 </div>
             </div>
 
+            <div id="rekappresensi">
+                <h3 style="font-family: Arial, Helvetica, sans-serif;">Rekap Presensi Bulan {{$namaBulan[$bulanIni]}} Tahun {{$tahunIni}}</h3>
+                <div class="row">
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body text-center" style="padding: 14px 10px !important;">
+                                <span class="badge bg-danger" style="position: absolute; top: 3px; right: 10px; 
+                                    font-size: smaller; z-index:999;">10</span>
+                                <ion-icon name="accessibility-outline" style="font-size: 1.5rem;" class="text-primary"></ion-icon>
+                                <br>
+                                <span style="font-size: 0.8rem; font-family: Arial, Helvetica, sans-serif; font-weight:500;">Hadir</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body text-center" style="padding: 14px 10px !important;">
+                                <span class="badge bg-danger" style="position: absolute; top: 3px; right: 10px; 
+                                    font-size: smaller; z-index:999;">10</span>
+                                <ion-icon name="newspaper-outline" style="font-size: 1.5rem;" class="text-success"></ion-icon>
+                                <br>
+                                <span style="font-size: 0.8rem; font-family: Arial, Helvetica, sans-serif; font-weight:500;">Izin</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body text-center" style="padding: 14px 10px !important;">
+                                <span class="badge bg-danger" style="position: absolute; top: 3px; right: 10px; 
+                                    font-size: smaller; z-index:999;">10</span>
+                                <ion-icon name="medkit-outline" style="font-size: 1.5rem;" class="text-warning"></ion-icon>
+                                <br>
+                                <span style="font-size: 0.8rem; font-family: Arial, Helvetica, sans-serif; font-weight:500;">Sakit</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <div class="card">
+                            <div class="card-body text-center" style="padding: 14px 10px !important;">
+                                <span class="badge bg-danger" style="position: absolute; top: 3px; right: 10px; 
+                                    font-size: smaller; z-index:999;">10</span>
+                                <ion-icon name="alarm-outline" style="font-size: 1.5rem;" class="text-danger"></ion-icon>
+                                <br>
+                                <span style="font-size: 0.8rem; font-family: Arial, Helvetica, sans-serif; font-weight:500;">Telat</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             
             <div class="presencetab mt-2">
                 <div class="tab-pane fade show active" id="pilled" role="tabpanel">
@@ -127,8 +176,8 @@
                                     </div>
                                     <div class="in">
                                         <div>{{ date("d-m-Y", strtotime($item->tgl_presensi)) }}</div>
-                                        <span class="badge badge-success">in | {{$presensiHariIni != null ? $item -> jam_masuk : 'Belum Absen'}}</span>
-                                        <span class="badge badge-danger">out | {{$presensiHariIni != null && $item->jam_keluar != null ? $item -> jam_keluar : 'Belum Absen'}}</span>
+                                        <span class="badge badge-success">in | {{$presensiHariIni != null ? $item -> jam_masuk : 'Absen'}}</span>
+                                        <span class="badge badge-danger">out | {{$presensiHariIni != null && $item->jam_keluar != null ? $item -> jam_keluar : 'Absen'}}</span>
                                     </div>
                                 </div>
                             </li>
