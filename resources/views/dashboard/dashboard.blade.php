@@ -4,7 +4,7 @@
 
 <!-- App Capsule -->
 <div id="appCapsule">
-        <div class="section" id="user-section">
+        <div class="section bg-success" id="user-section">
             <div id="user-detail">
                 <div class="avatar">
                     <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
@@ -68,7 +68,7 @@
             <div class="todaypresence">
                 <div class="row">
                     <div class="col-6">
-                        <div class="card gradasigreen">
+                        <div class="card gradasiblue">
                             <div class="card-body">
                                 <div class="presencecontent">
                                     <div class="iconpresence">

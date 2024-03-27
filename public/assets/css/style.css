@@ -8055,6 +8055,15 @@ body.dark-mode-active .cart-item .cart-item-footer {
   );
 }
 
+.gradasiblue {
+  color: white;
+  background-image: linear-gradient(
+    to bottom right,
+    rgba(0, 0, 255, 1),
+    rgba(0, 0, 255, 0.8)
+  );
+}
+
 .gradasired {
   color: white;
   background-image: linear-gradient(
