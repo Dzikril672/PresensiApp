@@ -33,24 +33,31 @@ class PresensiController extends Controller
         $lokasiBagi = explode(",", $lokasi); //membagi lat dan long lokasi user
         $latUser = $lokasiBagi[0];
         $lonUser = $lokasiBagi[1];
-        $latKantor = -6.168059788631966;
-        $lonKantor = 106.72647101525327;
+        $latKantor = -6.234756399995916;
+        $lonKantor = 106.82148599999596;
 
         //proses menghitung jarak
         $jarak = $this -> distance($latKantor, $lonKantor, $latUser, $lonUser);
         $radius = round($jarak["meters"]);
 
+        //cek ketersediaan data
+        $cek = DB::table('presensi')->where('tgl_presensi', $tgl_presensi)->where('nik', $nik)->count();
+        if($cek > 0){
+            $ket = "out";
+        }else{
+            $ket = "in";
+        }
+
         //proses untuk image atau capture gambar
         $folderPath = "public/uploads/absensi"; //url folder tempat menyimpan data gambar
-        $formatName = $nik."-".$tgl_presensi; //format penamaan file gambar
+        $formatName = $nik."-".$tgl_presensi."-".$ket; //format penamaan file gambar
         $imageCode = explode(";base64", $image); //.code gambar dalam base64 yang dicapture
         $imageDecode = base64_decode($imageCode[1]);
         $fileName = $formatName.".png"; //nama file disimpan dengan ekstensi file .png
         $file = $folderPath . $fileName; //url file yang akan diupload
 
         //proses untuk data yang akan dikirim ketika absen pulang (update)
-        $cek = DB::table('presensi')->where('tgl_presensi', $tgl_presensi)->where('nik', $nik)->count();
-        if($radius > 10){
+        if($radius > 30){
             echo "error|Maaf Anda Berada Di Luar Radius \n Jarak Anda " .$radius." meter dari kantor|radius";
         } else{
             if($cek > 0){
