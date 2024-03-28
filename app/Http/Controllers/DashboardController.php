@@ -42,12 +42,13 @@ class DashboardController extends Controller
             "Desember"];
         
         $rekapPresensi = DB::table('presensi')
-        ->selectRaw('COUNT(nik) as jmlhadir')
+        ->selectRaw('COUNT(nik) as jmlhadir, SUM(IF(jam_masuk > "08 :30", 1, 0)) as jmlTelat')
         ->where('nik', $nik)
         ->whereRaw('MONTH(tgl_presensi)="'.$bulanIni.'"')
         ->whereRaw('YEAR(tgl_presensi)="'.$tahunIni.'"')
         ->first();
         
-        return view('dashboard.dashboard', compact('presensiHariIni', 'historiBulanIni', 'namaBulan', 'bulanIni', 'tahunIni', ));
+        return view('dashboard.dashboard', compact('presensiHariIni', 'historiBulanIni', 
+            'namaBulan', 'bulanIni', 'tahunIni','rekapPresensi' ));
     }
 }

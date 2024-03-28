@@ -107,7 +107,7 @@
                         <div class="card">
                             <div class="card-body text-center" style="padding: 14px 10px !important;">
                                 <span class="badge bg-danger" style="position: absolute; top: 3px; right: 10px; 
-                                    font-size: smaller; z-index:999;">10</span>
+                                    font-size: smaller; z-index:999;">{{$rekapPresensi -> jmlhadir}}</span>
                                 <ion-icon name="accessibility-outline" style="font-size: 1.5rem;" class="text-primary"></ion-icon>
                                 <br>
                                 <span style="font-size: 0.8rem; font-family: Arial, Helvetica, sans-serif; font-weight:500;">Hadir</span>
@@ -140,7 +140,7 @@
                         <div class="card">
                             <div class="card-body text-center" style="padding: 14px 10px !important;">
                                 <span class="badge bg-danger" style="position: absolute; top: 3px; right: 10px; 
-                                    font-size: smaller; z-index:999;">10</span>
+                                    font-size: smaller; z-index:999;">{{$rekapPresensi -> jmlTelat}}</span>
                                 <ion-icon name="alarm-outline" style="font-size: 1.5rem;" class="text-danger"></ion-icon>
                                 <br>
                                 <span style="font-size: 0.8rem; font-family: Arial, Helvetica, sans-serif; font-weight:500;">Telat</span>
