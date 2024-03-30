@@ -47,8 +47,14 @@ class DashboardController extends Controller
         ->whereRaw('MONTH(tgl_presensi)="'.$bulanIni.'"')
         ->whereRaw('YEAR(tgl_presensi)="'.$tahunIni.'"')
         ->first();
+
+        $leaderboards = DB::table('presensi')
+        ->join('karyawan','presensi.nik','=','karyawan.nik')
+        ->where('tgl_presensi', $hariIni)
+        ->orderBy('jam_masuk')
+        ->get();
         
         return view('dashboard.dashboard', compact('presensiHariIni', 'historiBulanIni', 
-            'namaBulan', 'bulanIni', 'tahunIni','rekapPresensi' ));
+            'namaBulan', 'bulanIni', 'tahunIni','rekapPresensi', 'leaderboards'));
     }
 }

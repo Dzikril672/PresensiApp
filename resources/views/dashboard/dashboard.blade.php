@@ -3,15 +3,22 @@
 @section('content')
 
 <!-- App Capsule -->
-<div id="appCapsule">
+    <div id="appCapsule">
         <div class="section bg-success" id="user-section">
             <div id="user-detail">
                 <div class="avatar">
+                    @if(!empty(Auth::guard('karyawan') -> user() -> foto))
+                        @php
+                            $path = Storage::url('uploads/karyawan/'.Auth::guard('karyawan') -> user() -> foto);
+                        @endphp
+                        <img src="{{url($path)}}" alt="avatar" class="imaged w64 rounded" style="height: 70px;">
+                    @else
                     <img src="assets/img/sample/avatar/avatar1.jpg" alt="avatar" class="imaged w64 rounded">
+                    @endif
                 </div>
                 <div id="user-info">
-                    <h2 id="user-name">Dzikril Hakim</h2>
-                    <span id="user-role">Direktur</span>
+                    <h2 id="user-name">{{Auth::guard('karyawan')->user()->nama_lengkap}}</h2>
+                    <span id="user-role">{{Auth::guard('karyawan')->user()->jabatan}}</span>
                 </div>
             </div>
         </div>
@@ -176,8 +183,8 @@
                                     </div>
                                     <div class="in">
                                         <div>{{ date("d-m-Y", strtotime($item->tgl_presensi)) }}</div>
-                                        <span class="badge badge-success">in | {{$presensiHariIni != null ? $item -> jam_masuk : 'Absen'}}</span>
-                                        <span class="badge badge-danger">out | {{$presensiHariIni != null && $item->jam_keluar != null ? $item -> jam_keluar : 'Absen'}}</span>
+                                        <span class="badge badge-success">{{$presensiHariIni != null ? $item -> jam_masuk : 'Absen'}}</span>
+                                        <span class="badge badge-danger">{{$presensiHariIni != null && $item->jam_keluar != null ? $item -> jam_keluar : 'Absen'}}</span>
                                     </div>
                                 </div>
                             </li>
@@ -186,55 +193,25 @@
                     </div>
                     <div class="tab-pane fade" id="profile" role="tabpanel">
                         <ul class="listview image-listview">
-                            <li>
-                                <div class="item">
-                                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                                    <div class="in">
-                                        <div>Edward Lindgren</div>
-                                        <span class="text-muted">Designer</span>
+                            @foreach($leaderboards as $item)
+                                <li>
+                                    <div class="item">
+                                        <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
+                                        <div class="in">
+                                            <div>{{substr($item->nama_lengkap, 0, 13)}}
+                                                <br>
+                                                <small class="text-muted">{{$item -> jabatan}}</small>
+                                            </div>
+                                            <span class="badge {{$item -> jam_masuk <= "07:00" ? "badge-success" : "badge-primary" }}">{{$item -> jam_masuk}}</span>
+                                            <span class="badge badge-danger">{{$item -> jam_keluar}}</span>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                                    <div class="in">
-                                        <div>Emelda Scandroot</div>
-                                        <span class="badge badge-primary">3</span>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                                    <div class="in">
-                                        <div>Henry Bove</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                                    <div class="in">
-                                        <div>Henry Bove</div>
-                                    </div>
-                                </div>
-                            </li>
-                            <li>
-                                <div class="item">
-                                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
-                                    <div class="in">
-                                        <div>Henry Bove</div>
-                                    </div>
-                                </div>
-                            </li>
+                                </li>
+                            @endforeach
                         </ul>
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
-    <!-- * App Capsule -->
-
 @endsection

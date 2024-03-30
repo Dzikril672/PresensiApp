@@ -121,8 +121,13 @@
             
             //mengatur titik koordinat kantor dan radiusnya
             var circle = L.circle([
-                -6.180005585927644, 
-                106.70907087198061], 
+                //untuk lokasi ITPLN
+                // -6.180005585927644, 
+                // 106.70907087198061],
+                
+                //untuk lokasi kantor jamsostek
+                -6.234762699996218, 
+                106.82150100000007],
             {
                 color: 'blue',
                 fillColor: '#f03',
