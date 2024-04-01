@@ -61,7 +61,7 @@
     </div>
     <div class="row mt-2">
         <div class="col">
-            <div id="map"></div>
+            <div id="map" style="position: relative; margin-bottom: 4rem; outline-style: dashed;"></div>
         </div>
     </div>
     <audio id="notif_masuk">
