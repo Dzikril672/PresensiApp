@@ -57,7 +57,7 @@ class PresensiController extends Controller
         }
 
         //proses untuk image atau capture gambar
-        $folderPath = "public/uploads/absensi"; //url folder tempat menyimpan data gambar
+        $folderPath = "public/uploads/absensi/"; //url folder tempat menyimpan data gambar
         $formatName = $nik."-".$tgl_presensi."-".$ket; //format penamaan file gambar
         $imageCode = explode(";base64", $image); //.code gambar dalam base64 yang dicapture
         $imageDecode = base64_decode($imageCode[1]);
@@ -156,6 +156,7 @@ class PresensiController extends Controller
             ];
         }
 
+        //update foto profil
         $update = DB::table('karyawan')->where('nik', $nik) -> update($data);
         if($update){
             if($request -> hasFile('foto')){
@@ -166,6 +167,46 @@ class PresensiController extends Controller
         }else{
             return Redirect::back()->with(['error'=> 'Data Gagal Diupdate']);
         }
+    }
+
+    public function histori(){
+
+        //mengganti data bulan (angka) menjadi nama bulan
+        $namaBulan = [
+            "",
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember"
+        ];
+
+
+
+        return view('presensi.histori', compact('namaBulan'));
+    }
+
+    public function getHistori(Request $request){
+        
+        $nik = Auth::guard('karyawan')->user()->nik;
+        $bulan = $request -> bulan;
+        $tahun = $request ->tahun;
+
+        $histori = DB::table('presensi')
+        ->whereRaw('MONTH(tgl_presensi)="' .$bulan. '"')
+        ->whereRaw('YEAR(tgl_presensi)="' .$tahun. '"')
+        ->where('nik', $nik)
+        ->orderBy('tgl_presensi')
+        ->get();
+
+        return view('presensi.getHistori', compact('histori'));
     }
 
 }

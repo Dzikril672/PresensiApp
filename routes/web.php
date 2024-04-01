@@ -38,6 +38,11 @@ Route::middleware(['auth:karyawan'])-> group(function () {
     //edit profile
     Route::get('/editProfile', [PresensiController::class,'editProfile']);
     Route::post('/presensi/{nik}/updateProfile', [PresensiController::class,'updateProfile']);
+
+    //histori
+    Route::get('/presensi/histori', [PresensiController::class,'histori']);
+    Route::post('/getHistori', [PresensiController::class,'getHistori']);
+
 });
 
 

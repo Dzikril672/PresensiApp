@@ -196,14 +196,17 @@
                             @foreach($leaderboards as $item)
                                 <li>
                                     <div class="item">
-                                        <img src="assets/img/sample/avatar/avatar1.jpg" alt="image" class="image">
+                                        @php
+                                            $path = Storage::url('uploads/karyawan/'.$item -> foto);
+                                        @endphp
+                                        <img src="{{url($path)}}" alt="image" class="image">
                                         <div class="in">
                                             <div>{{substr($item->nama_lengkap, 0, 13)}}
                                                 <br>
                                                 <small class="text-muted">{{$item -> jabatan}}</small>
                                             </div>
                                             <span class="badge {{$item -> jam_masuk <= "07:00" ? "badge-success" : "badge-primary" }}">{{$item -> jam_masuk}}</span>
-                                            <span class="badge badge-danger">{{$item -> jam_keluar}}</span>
+                                            <!-- <span class="badge badge-danger">{{$item -> jam_keluar}}</span> -->
                                         </div>
                                     </div>
                                 </li>
