@@ -5,6 +5,16 @@
 <!-- link css untuk form datepicker -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css">
 
+<!-- style css tambahan untuk mengatur datepicker  -->
+<style>
+    .datepicker-modal{
+        max-height: 430px !important;
+    }
+    .datepicker-date-display{
+        background-color: #34c759;
+    }
+</style>
+
 <!-- App Header -->
 <div class="appHeader bg-success text-light">
     <div class="left">

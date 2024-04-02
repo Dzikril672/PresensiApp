@@ -48,6 +48,14 @@ class DashboardController extends Controller
         ->whereRaw('YEAR(tgl_presensi)="'.$tahunIni.'"')
         ->first();
 
+        $rekapIzin = DB::table('pengajuan_izin')
+        ->selectRaw('SUM(IF(status ="i" , 1, 0)) as jmlIzin, SUM(IF(status ="s" , 1, 0)) as jmlSakit')
+        ->where('nik', $nik)
+        ->whereRaw('MONTH(tgl_izin)="'.$bulanIni.'"')
+        ->whereRaw('YEAR(tgl_izin)="'.$tahunIni.'"')
+        ->where('status_approved', 1)
+        ->first();
+
         $leaderboards = DB::table('presensi')
         ->join('karyawan','presensi.nik','=','karyawan.nik')
         ->where('tgl_presensi', $hariIni)
@@ -55,6 +63,6 @@ class DashboardController extends Controller
         ->get();
         
         return view('dashboard.dashboard', compact('presensiHariIni', 'historiBulanIni', 
-            'namaBulan', 'bulanIni', 'tahunIni','rekapPresensi', 'leaderboards'));
+            'namaBulan', 'bulanIni', 'tahunIni','rekapPresensi', 'leaderboards', 'rekapIzin'));
     }
 }
