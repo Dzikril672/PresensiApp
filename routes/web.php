@@ -17,16 +17,31 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-//Session untuk login
+//Session untuk login karyawan
 Route::middleware(['guest:karyawan']) -> group(function () {
     Route::get('/', function () {
         return view('auth.login');
     })->name('login');
-    
     Route::post('/loginrequest', [AuthController::class, 'loginrequest']);
 });
 
-//Session agar tetap login
+//Session untuk login admin
+Route::middleware(['guest:user']) -> group(function () {
+    Route::get('/admin', function () {
+        return view('auth.loginAdmin');
+    })->name('loginAdmin');
+    Route::post('/loginAdminRequest', [AuthController::class, 'loginAdminRequest']);
+});
+
+//session agar admin tetap login
+Route::middleware(['auth:user'])-> group(function () {
+    Route::get('/admin/dashboardAdmin', [DashboardController::class,'dashboardAdmin']);
+    Route::get('/logoutrequestAdmin', [AuthController::class,'logoutrequestAdmin']);
+
+
+});
+
+//Session agar karyawan tetap login
 Route::middleware(['auth:karyawan'])-> group(function () {
     Route::get('/dashboard', [DashboardController::class, 'home']);
     Route::get('/logoutrequest', [AuthController::class,'logoutrequest']);
@@ -49,5 +64,6 @@ Route::middleware(['auth:karyawan'])-> group(function () {
     Route::post('/presensi/storeIzin', [PresensiController::class,'storeIzin']);
 
 });
+
 
 
