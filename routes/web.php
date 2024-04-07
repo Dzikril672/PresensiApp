@@ -40,7 +40,7 @@ Route::middleware(['auth:user'])-> group(function () {
     Route::get('/logoutrequestAdmin', [AuthController::class,'logoutrequestAdmin']);
 
     //karyawan
-    Route::get('/karyawan', [KaryawanController::class,'index']);
+    Route::get('/admin/karyawan', [KaryawanController::class,'index']);
 
 });
 
