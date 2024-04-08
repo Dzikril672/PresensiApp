@@ -59,7 +59,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12">
-                                <form action="/admin/karyawan" method="GET">
+                                <form action="/karyawan" method="GET">
                                     <div class="row">
                                         <div class="col-6">
                                             <div class="form-group">
@@ -136,7 +136,36 @@
                                                     @endif
                                                 </td>
                                                 <td>{{$item -> nama_departemen}}</td>
-                                                <td></td>
+                                                <td>
+                                                    <a href="#" class="edit btn btn-primary btn-sm" nik="{{ $item -> nik }}">
+                                                        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  
+                                                            stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  
+                                                            class="icon icon-tabler icons-tabler-outline icon-tabler-edit">
+                                                                <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                                <path d="M7 7h-1a2 2 0 0 0 -2 2v9a2 2 0 0 0 2 2h9a2 2 0 0 0 2 -2v-1" />
+                                                                <path d="M20.385 6.585a2.1 2.1 0 0 0 -2.97 -2.97l-8.415 8.385v3h3l8.385 -8.415z" />
+                                                                <path d="M16 5l3 3" />
+                                                        </svg>
+                                                    </a>
+
+                                                    <form action="/karyawan/{{ $item -> nik }}/deleteProses" method="POST">
+                                                        @csrf
+
+                                                        <!-- @method('DELETE') -->
+                                                        <a class="btn btn-danger btn-sm konfirmasiDelete">
+                                                            <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  
+                                                                stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  
+                                                                class="icon icon-tabler icons-tabler-outline icon-tabler-trash">
+                                                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                                                                    <path d="M4 7l16 0" />
+                                                                    <path d="M10 11l0 6" />
+                                                                    <path d="M14 11l0 6" />
+                                                                    <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />
+                                                                    <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+                                                            </svg>
+                                                        </a>
+                                                    </form>
+                                                </td>
                                             </tr>
                                         @endforeach
                                     </tbody>
@@ -152,6 +181,7 @@
     </div>
 </div>
 
+<!-- modal input karyawan -->
 <div class="modal modal-blur fade" id="modal-inputKaryawan" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
@@ -160,7 +190,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="/admin/karyawan/store" method="POST" id="formTambahKaryawan" enctype="multipart/form-data">
+            <form action="/karyawan/store" method="POST" id="formTambahKaryawan" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-12">
@@ -281,6 +311,21 @@
     </div>
 </div>
 
+<!-- Modal edit data karyawan -->
+<div class="modal modal-blur fade" id="modal-editKaryawan" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Data Karyawan</h5>   
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body" id="loadEditForm">
+            
+          </div>
+        </div>
+    </div>
+</div>
+
 @endsection
 
 @push('myscript')
@@ -288,6 +333,44 @@
         $(function(){
             $("#btnTambahKaryawan").click(function(){
                 $("#modal-inputKaryawan").modal("show");
+            });
+
+            $(".edit").click(function(){
+                var nik = $(this).attr('nik');
+
+                $.ajax({
+                    type: 'POST',
+                    url : '/karyawan/editForm',
+                    cache : false,
+                    data : {
+                        _token : "{{ csrf_token() }}",
+                        nik : nik
+                    },
+                    success: function(respond){
+                        $("#loadEditForm").html(respond);
+                    }
+                });
+
+                $("#modal-editKaryawan").modal("show");
+            });
+
+            $(".konfirmasiDelete").click(function(e){
+                //memilih form dari si button
+                form = $(this).closest('form');
+
+                e.preventDefault();
+                Swal.fire({
+                    title: "Konfirmasi Hapus Data",
+                    showCancelButton: true,
+                    confirmButtonText: "Delete"
+                }).then((result) => {
+                    /* Read more about isConfirmed, isDenied below */
+                    if (result.isConfirmed) {
+                        form.submit();
+                        Swal.fire("Deleted!", "", "success");
+                    }
+});
+
             });
 
             $("#formTambahKaryawan").submit(function(){

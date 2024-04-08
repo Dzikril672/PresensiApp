@@ -40,8 +40,11 @@ Route::middleware(['auth:user'])-> group(function () {
     Route::get('/logoutrequestAdmin', [AuthController::class,'logoutrequestAdmin']);
 
     //karyawan
-    Route::get('/admin/karyawan', [KaryawanController::class,'index']);
-    Route::post('/admin/karyawan/store', [KaryawanController::class,'store']);
+    Route::get('/karyawan', [KaryawanController::class,'index']);
+    Route::post('/karyawan/store', [KaryawanController::class,'store']);
+    Route::post('/karyawan/editForm', [KaryawanController::class,'editForm']);
+    Route::post('/karyawan/{nik}/updateProses', [KaryawanController::class,'updateProses']);
+    Route::post('/karyawan/{nik}/deleteProses', [KaryawanController::class,'deleteProses']);
 
 });
 
