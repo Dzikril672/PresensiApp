@@ -162,8 +162,11 @@
                 <div class="dropdown-menu">
                   <div class="dropdown-menu-columns">
                     <div class="dropdown-menu-column">
-                      <a class="dropdown-item" href="/admin/karyawan">
-                        Data Karyawan
+                      <a class="dropdown-item" href="/karyawan">
+                        Karyawan
+                      </a>
+                      <a class="dropdown-item" href="/departemen">
+                        Departemen 
                       </a>
                     </div>
                   </div>
