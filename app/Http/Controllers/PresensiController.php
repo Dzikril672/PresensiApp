@@ -242,4 +242,21 @@ class PresensiController extends Controller
         }
     }
 
+    public function monitoring(){
+        return view('presensi.monitoring');
+    }
+
+    public function getPresensi(Request $request){
+        $tanggal = $request ->tanggal;
+
+        $presensi = DB::table('presensi')
+            ->select('presensi.*', 'nama_lengkap', 'nama_departemen')
+            ->join('karyawan', 'presensi.nik','=','karyawan.nik')
+            ->join('departemen','karyawan.kode_departemen','=','departemen.kode_departemen')
+            ->where('tgl_presensi', $tanggal)
+            ->get();
+
+        return view('presensi.getPresensi', compact('presensi'));
+    }
+
 }

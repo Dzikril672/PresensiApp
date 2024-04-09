@@ -54,6 +54,10 @@ Route::middleware(['auth:user'])-> group(function () {
     Route::post('/departemen/{kode_departemen}/updateProses', [DepartemenController::class,'updateProses']);
     Route::post('/departemen/{kode_departemen}/deleteProses', [DepartemenController::class,'deleteProses']);
 
+    //presensi
+    Route::get('/presensi/monitoring',[PresensiController::class,'monitoring']);
+    Route::post('/getPresensi',[PresensiController::class,'getPresensi']);
+
 });
 
 //Session agar karyawan tetap login
