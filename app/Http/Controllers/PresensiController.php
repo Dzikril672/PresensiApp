@@ -259,4 +259,16 @@ class PresensiController extends Controller
         return view('presensi.getPresensi', compact('presensi'));
     }
 
+    public function tampilPeta(Request $request){
+        $id = $request -> id;
+
+        $presensi = DB::table('presensi')
+            ->join('karyawan','presensi.nik','=','karyawan.nik')
+            ->where('id', $id)
+            ->first();
+        
+        return view('presensi.tampilPeta', compact('presensi'));
+        
+    }
+
 }
