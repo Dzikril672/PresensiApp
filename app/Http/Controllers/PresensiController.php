@@ -188,8 +188,6 @@ class PresensiController extends Controller
             "Desember"
         ];
 
-
-
         return view('presensi.histori', compact('namaBulan'));
     }
 
@@ -269,6 +267,67 @@ class PresensiController extends Controller
         
         return view('presensi.tampilPeta', compact('presensi'));
         
+    }
+
+    public function laporanPresensi(){
+
+        $karyawan = DB::table('karyawan')
+            ->orderBy('nama_lengkap')
+            ->get();
+
+        //mengganti data bulan (angka) menjadi nama bulan
+        $namaBulan = [
+            "",
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember"
+        ];
+
+        return view('presensi.laporanPresensi', compact('namaBulan', 'karyawan'));
+    }
+
+    public function cetakLaporan(Request $request){
+        $nik = $request -> nik;
+        $bulan = $request ->bulan;
+        $tahun = $request ->tahun;
+
+        $namaBulan = [
+            "",
+            "Januari",
+            "Februari",
+            "Maret",
+            "April",
+            "Mei",
+            "Juni",
+            "Juli",
+            "Agustus",
+            "September",
+            "Oktober",
+            "November",
+            "Desember"
+        ];
+
+        $karyawan = DB::table('karyawan')
+            ->join('departemen','karyawan.kode_departemen','=','departemen.kode_departemen')
+            ->where('nik', $nik)
+            ->first();
+        
+        $presensi = DB::table('presensi')
+            ->where('nik', $nik)
+            ->whereRaw('MONTH(tgl_presensi)="' .$bulan. '"')
+            ->whereRaw('YEAR(tgl_presensi)="' .$tahun. '"')
+            ->get();
+
+        return view('presensi.cetakLaporan', compact('bulan','tahun', 'namaBulan', 'karyawan', 'presensi'));
     }
 
 }

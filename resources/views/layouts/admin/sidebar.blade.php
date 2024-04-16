@@ -141,7 +141,7 @@
           <div class="collapse navbar-collapse" id="sidebar-menu">
             <ul class="navbar-nav pt-lg-3">
               <li class="nav-item">
-                <a class="nav-link" href="./" >
+                <a class="nav-link" href="/admin/dashboardAdmin" >
                   <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/home -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" 
                       stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -191,6 +191,34 @@
                       </a>
                       <a class="dropdown-item" href="/departemen">
                         Departemen 
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#navbar-base" data-bs-toggle="dropdown" data-bs-auto-close="false" role="button" aria-expanded="false" >
+                  <span class="nav-link-icon d-md-none d-lg-inline-block"><!-- Download SVG icon from http://tabler-icons.io/i/package -->
+                    <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  
+                      stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round"  class="icon icon-tabler icons-tabler-outline icon-tabler-license">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+                        <path d="M15 21h-9a3 3 0 0 1 -3 -3v-1h10v2a2 2 0 0 0 4 0v-14a2 2 0 1 1 2 2h-2m2 -4h-11a3 3 0 0 0 -3 3v11" />
+                        <path d="M9 7l4 0" />
+                        <path d="M9 11l4 0" />
+                      </svg>
+                  </span>
+                  <span class="nav-link-title">
+                    Data Laporan
+                  </span>
+                </a>
+                <div class="dropdown-menu">
+                  <div class="dropdown-menu-columns">
+                    <div class="dropdown-menu-column">
+                      <a class="dropdown-item" href="/presensi/laporanPresensi">
+                        Presensi Karyawan
+                      </a>
+                      <a class="dropdown-item" href="/departemen">
+                        Rekap Presensi 
                       </a>
                     </div>
                   </div>

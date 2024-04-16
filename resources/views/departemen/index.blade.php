@@ -280,7 +280,7 @@
                         form.submit();
                         Swal.fire("Deleted!", "", "success");
                     }
-});
+                });
 
             });
 
@@ -295,7 +295,7 @@
                         icon: 'warning',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
-                        $("#nik").focus();
+                        $("#kode_departemen").focus();
                     });
                     
                     return false;
@@ -307,7 +307,7 @@
                         icon: 'warning',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
-                        $("#nik").focus();
+                        $("#nama_departemen").focus();
                     });
 
                     return false;

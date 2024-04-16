@@ -59,7 +59,7 @@
                                         <th>jam Pulang</th>
                                         <th>Foto Pulang</th>
                                         <th>keterangan</th>
-                                        <th>dada</th>
+                                        <th>Lokasi</th>
                                     </tr>
                                 </thead>
 
