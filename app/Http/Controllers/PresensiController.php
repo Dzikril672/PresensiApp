@@ -16,9 +16,13 @@ class PresensiController extends Controller
 
         $hariIni = date("Y-m-d");
         $nik = Auth::guard('karyawan')->user()->nik;
+        $lokasi_kantor = DB::table('konfigurasi_lokasi')
+            ->where('id', 1)
+            ->first();
+
         $cek = DB::table('presensi')->where('tgl_presensi', $hariIni)->where('nik', $nik)->count();
 
-        return view('presensi.create', compact('cek'));
+        return view('presensi.create', compact('cek', 'lokasi_kantor'));
     }
 
     //fungsi untuk mengambil data yang dikirim dari halaman presensi dan akan diupload ke database
@@ -31,18 +35,18 @@ class PresensiController extends Controller
         $lokasi = $request ->lokasi; // mengambil lokasi user saat ini dari peta pada halaman presensi
         $image = $request ->image; // mengambil gambar user dari webcam pada halaman presensi
 
-        //pembagian data lokasi
+        //pembagian data lokasi user
         $lokasiBagi = explode(",", $lokasi); //membagi lat dan long lokasi user
         $latUser = $lokasiBagi[0];
         $lonUser = $lokasiBagi[1];
 
-        //lokasi ITPLN
-        // $latKantor = -6.180005585927644;
-        // $lonKantor = 106.70907087198061;
-
-        //lokasi kantor jamsostek
-        $latKantor = -6.234762699996218;
-        $lonKantor = 106.82150100000007;
+        //lokasi kantor dengan data dinamis
+        $lokasi_kantor = DB::table('konfigurasi_lokasi')
+            ->where('id', 1)
+            ->first();
+        $lokasiBagiKantor =explode(",", $lokasi_kantor->lokasi_kantor);
+        $latKantor = $lokasiBagiKantor[0];
+        $lonKantor = $lokasiBagiKantor[1];
 
         //proses menghitung jarak
         $jarak = $this -> distance($latKantor, $lonKantor, $latUser, $lonUser);
@@ -65,7 +69,7 @@ class PresensiController extends Controller
         $file = $folderPath . $fileName; //url file yang akan diupload
 
         //proses untuk data yang akan dikirim ketika absen pulang (update)
-        if($radius > 60){
+        if($radius > $lokasi_kantor->radius){
             echo "error|Maaf Anda Berada Di Luar Radius \n Jarak Anda " .$radius." meter dari kantor|radius";
         } else{
             if($cek > 0){

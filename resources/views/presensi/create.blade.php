@@ -100,6 +100,12 @@
         function successCallback(position){
             lokasi.value = position.coords.latitude+", "+position.coords.longitude;
 
+            var lokasi_kantor = "{{ $lokasi_kantor -> lokasi_kantor }}";
+            var pecahLokasi = lokasi_kantor.split(',');
+            var lat_kantor = pecahLokasi[0];
+            var long_kantor = pecahLokasi[1];
+            var radius = "{{ $lokasi_kantor -> radius }}";
+
             //mengatur tampilan maps berdasarkan posisi pengguna
             var map = L.map('map').setView([
                 position.coords.latitude, 
@@ -126,13 +132,13 @@
                 // 106.70907087198061],
                 
                 //untuk lokasi kantor jamsostek
-                -6.234762699996218, 
-                106.82150100000007],
+                lat_kantor, 
+                long_kantor],
             {
                 color: 'blue',
                 fillColor: '#f03',
                 fillOpacity: 0.5,
-                radius: 60 //mengatur jarak radius lingkaran
+                radius:  radius//mengatur jarak radius lingkaran
             }).addTo(map);
         }
 

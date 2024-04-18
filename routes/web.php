@@ -4,6 +4,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DepartemenController;
 use App\Http\Controllers\KaryawanController;
+use App\Http\Controllers\KonfigurasiController;
 use App\Http\Controllers\PresensiController;
 use App\Models\Karyawan;
 use Illuminate\Support\Facades\Route;
@@ -62,6 +63,10 @@ Route::middleware(['auth:user'])-> group(function () {
     Route::post('/presensi/cetakLaporan',[PresensiController::class,'cetakLaporan']);
     Route::get('/presensi/rekapPresensi',[PresensiController::class,'rekapPresensi']);
     Route::post('/presensi/cetakRekap',[PresensiController::class,'cetakRekap']);
+
+    //konfigurasi
+    Route::get('/konfigurasi/lokasiKantor', [KonfigurasiController::class, 'lokasiKantor']);
+    Route::post('/konfigurasi/updateLokasiKantor', [KonfigurasiController::class, 'updateLokasiKantor']);
 
 });
 
