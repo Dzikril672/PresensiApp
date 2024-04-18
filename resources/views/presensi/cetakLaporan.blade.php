@@ -197,7 +197,7 @@
                         @endphp
                     @else
                         @php
-                            $jamKerja = 0;
+                            $jamKerja = '0 jam : 0 menit';
                         @endphp
                     @endif
                     {{ $jamKerja }}
@@ -208,7 +208,8 @@
 
     <table width="100%" style="margin-top: 30px;">
         <tr>
-            <td colspan="2" style="text-align: right;">Jakarta, {{ date('d-m-Y') }}</td>
+            <td></td>
+            <td style="text-align: center;">Jakarta, {{ date('d-m-Y') }}</td>
         </tr>
         <tr>
             <td style="text-align: center; vertical-align: bottom;" height="120px">

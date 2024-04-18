@@ -217,7 +217,7 @@
                       <a class="dropdown-item" href="/presensi/laporanPresensi">
                         Presensi Karyawan
                       </a>
-                      <a class="dropdown-item" href="/departemen">
+                      <a class="dropdown-item" href="/presensi/rekapPresensi">
                         Rekap Presensi 
                       </a>
                     </div>
