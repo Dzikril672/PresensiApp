@@ -9,7 +9,7 @@
           <div class="col">
             <!-- Page pre-title -->
             <div class="page-pretitle">
-              Overview
+              Halaman
             </div>
             <h2 class="page-title">
               Dashboard

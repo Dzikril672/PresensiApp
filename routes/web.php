@@ -63,6 +63,9 @@ Route::middleware(['auth:user'])-> group(function () {
     Route::post('/presensi/cetakLaporan',[PresensiController::class,'cetakLaporan']);
     Route::get('/presensi/rekapPresensi',[PresensiController::class,'rekapPresensi']);
     Route::post('/presensi/cetakRekap',[PresensiController::class,'cetakRekap']);
+    Route::get('/presensi/kelolaPengajuanIzin',[PresensiController::class,'kelolaPengajuanIzin']);
+    Route::post('/presensi/approveIzin',[PresensiController::class,'approveIzin']);
+    Route::get('/presensi/{id}/batalkanPerizinan',[PresensiController::class,'batalkanPerizinan']);
 
     //konfigurasi
     Route::get('/konfigurasi/lokasiKantor', [KonfigurasiController::class, 'lokasiKantor']);
