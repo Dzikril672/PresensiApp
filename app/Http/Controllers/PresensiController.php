@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PengajuanIzin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -225,7 +226,7 @@ class PresensiController extends Controller
 
     public function storeIzin(Request $request){
         $nik = Auth::guard('karyawan')->user()->nik;
-        $tgl_izin = $request ->tanggalIzin;
+        $tgl_izin = $request ->tgl_izin;
         $status = $request -> status;
         $keterangan = $request -> keterangan;
 
@@ -421,12 +422,35 @@ class PresensiController extends Controller
         return view('presensi.cetakRekap', compact('rekap', 'tahun', 'bulan', 'namaBulan'));    
     }
 
-    public function kelolaPengajuanIzin(){
+    public function kelolaPengajuanIzin(Request $request){
+        $query = PengajuanIzin::query();
+        $query -> select('id', 'tgl_izin', 'pengajuan_izin.nik', 'nama_lengkap', 'jabatan', 'status', 'keterangan', 'status_approved');
+        $query -> join('karyawan', 'pengajuan_izin.nik', '=', 'karyawan.nik');
+        $query -> orderBy('tgl_izin', 'desc');
 
-        $dataIzinSakit = DB::table('pengajuan_izin')
-            ->join('karyawan', 'pengajuan_izin.nik', '=', 'karyawan.nik')
-            ->orderBy('tgl_izin', 'desc') 
-            ->get();
+        //filter data berdasarkan periode tanggal
+        if(!empty($request -> dari) && !empty($request -> dari)){
+            $query -> whereBetween('tgl_izin', [$request -> dari, $request -> sampai]);
+        }
+
+        //filter data berdasarkan nik
+        if(!empty($request -> nik)){
+            $query -> where('pengajuan_izin.nik', $request -> nik);
+        }
+        
+        //filter data berdasarkan nama
+        if(!empty($request -> nama_lengkap)){
+            $query -> where('nama_lengkap', 'LIKE', '%'.$request -> nama_lengkap.'%');
+        }
+
+        //filter data berdasarkan status approved
+        if($request -> status_approved != ""){
+            $query -> where('status_approved', $request -> status_approved);
+        }
+
+        $dataIzinSakit = $query -> paginate(2);
+        $dataIzinSakit -> appends($request-> all());
+            
 
         return view('presensi.kelolaPengajuanIzin', compact('dataIzinSakit'));
     }
@@ -459,6 +483,18 @@ class PresensiController extends Controller
         }else{
             return Redirect::back()->with(['error'=> 'Data Gagal Diupdate']);
         }
+    }
+
+    public function cekPengajuanIzin (Request $request){
+        $tgl_izin = $request -> tgl_izin;
+        $nik = Auth::guard('karyawan')->user()->nik;
+
+        $cek = DB::table('pengajuan_izin')
+            ->where('nik', $nik)
+            ->where('tgl_izin', $tgl_izin)
+            ->count();
+        
+        return $cek;
     }
 
 }

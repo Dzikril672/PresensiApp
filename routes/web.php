@@ -94,5 +94,6 @@ Route::middleware(['auth:karyawan'])-> group(function () {
     Route::get('/presensi/izin', [PresensiController::class,'izin']);
     Route::get('/presensi/pengajuanIzin', [PresensiController::class,'pengajuanIzin']);
     Route::post('/presensi/storeIzin', [PresensiController::class,'storeIzin']);
+    Route::post('/presensi/cekPengajuanIzin',[PresensiController::class,'cekPengajuanIzin']);
 
 });

@@ -34,7 +34,7 @@
             <form action="/presensi/storeIzin" method="POST" id="formIzin">
                 @csrf
                 <div class="form-group">
-                    <input name="tanggalIzin" id="tanggalIzin" type="text" class="form-control datepicker" placeholder="Tanggal">
+                    <input name="tgl_izin" id="tgl_izin" type="text" class="form-control datepicker" placeholder="Tanggal">
                 </div>
             
                 <div class="form-group">
@@ -63,8 +63,34 @@
                 format: "yyyy-mm-dd"    
             });
 
+            $("#tgl_izin").change(function(){
+                var tgl_izin = $(this).val();
+                
+                $.ajax ({
+                    type : 'POST',
+                    url : '/presensi/cekPengajuanIzin',
+                    data : {
+                        _token : "{{ csrf_token() }}",
+                        tgl_izin : tgl_izin
+                    },
+                    cache : false,
+                    success : function(respond){
+                        if(respond == 1 ){
+                            Swal.fire({
+                            title: 'Oops',
+                            text: 'Anda Sudah Mengajukan Izin ditanggal Ini',
+                            icon: 'warning',
+                            confirmButtonText: 'Ok'
+                        }).then((result) => {
+                            $("#tgl_izin").val("");
+                        });
+                        }
+                    }
+                });
+            });
+
             $("#formIzin").submit(function(){
-                var tgl_izin = $("#tanggalIzin").val();
+                var tgl_izin = $("#tgl_izin").val();
                 var status = $("#status").val();
                 var keterangan = $("#keterangan").val();
 
