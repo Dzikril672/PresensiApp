@@ -17024,7 +17024,6 @@ Navbar vertical
     display: flex;
     width: auto;
     padding-left: calc(calc(calc(var(--tblr-page-padding) * 2) / 2) + 1.75rem);
-    color: inherit;
   }
   .navbar-vertical.navbar-expand-lg .navbar-collapse .dropdown-menu .dropdown-item.active, .navbar-vertical.navbar-expand-lg .navbar-collapse .dropdown-menu .dropdown-item:active {
     background: var(--tblr-navbar-active-bg);
