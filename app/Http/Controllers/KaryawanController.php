@@ -72,8 +72,11 @@ class KaryawanController extends Controller
                 return Redirect::back()->with(['success' => 'Data Berhasil Disimpan']);
             }
         } catch (\Exception $e) {
-            // dd($e->getMessage());
-            return Redirect::back()->with(['warning'=> 'Data Gagal Disimpan']);
+            // dd($e);
+            if($e->getCode() == 23000){
+                $pesanError = ", data dengan NIK ". $nik ." sudah ada"; 
+            }
+            return Redirect::back()->with(['warning'=> 'Data Gagal Disimpan'.$pesanError]);
         }
     }
 

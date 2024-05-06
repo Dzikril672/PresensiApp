@@ -26,7 +26,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
-                        <form action="/presensi/cetakLaporan" target="_blank" method="POST">
+                        <form action="/presensi/cetakLaporan" id="formLaporan" target="_blank" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-12">
@@ -110,3 +110,52 @@
 </div>
 
 @endsection
+
+@push('myscript')
+    <script>
+        $(function(){
+            $("#formLaporan").submit(function(e){
+                var bulan = $("#bulan").val();
+                var tahun = $("#tahun").val();
+                var nik = $("#nik").val();
+
+                if(bulan == ""){
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: 'Pilih Bulan Terlebih Dahulu!',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        $("#bulan").focus();
+                    });
+                    
+                    return false;
+                }
+                else if(tahun == ""){
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: 'Pilih Tahun Terlebih Dahulu!',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        $("#tahun").focus();
+                    });
+
+                    return false;
+                }
+                else if(nik == ""){
+                    Swal.fire({
+                        title: 'Warning!',
+                        text: 'Pilih Karyawan Terlebih Dahulu !',
+                        icon: 'warning',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        $("#nik").focus();
+                    });
+
+                    return false;
+                }
+            });
+        });
+    </script>
+@endpush

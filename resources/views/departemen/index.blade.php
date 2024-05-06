@@ -193,7 +193,7 @@
                                         <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2"></path>
                                 </svg>
                             </span>
-                                <input type="text" value="" class="form-control" placeholder="Nama Departemen" name="nama_departemen" id="nama_departemen">
+                                <input type="text" value="" class="form-control" placeholder="Nama Departemen" name="nama_departemen1" id="nama_departemen1">
                         </div>
                     </div>
                 </div>
@@ -286,7 +286,7 @@
 
             $("#formTambahDepartemen").submit(function(){
                 var kode_departemen = $("#kode_departemen").val();
-                var nama_departemen = $("#nama_departemen").val();
+                var nama_departemen = $("#nama_departemen1").val();
 
                 if(kode_departemen == ""){
                     Swal.fire({
@@ -307,7 +307,7 @@
                         icon: 'warning',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
-                        $("#nama_departemen").focus();
+                        $("#nama_departemen1").focus();
                     });
 
                     return false;

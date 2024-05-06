@@ -332,6 +332,18 @@ class PresensiController extends Controller
             ->whereRaw('YEAR(tgl_presensi)="' .$tahun. '"')
             ->orderBy('tgl_presensi')
             ->get();
+        
+            if(isset($_POST['exportExel'])){
+                $time = date("d-M-Y H:i:s");
+
+                //fungsi header dengan mengirim raw data exel
+                header("Content-type: application/vnd-ms-excel");
+
+                //mendefinisikan nama file yang di ekspor
+                header("Content-Disposition: attachment; filename=Laporan Presensi Karyawan $nik $time.xlsx");
+
+                return view('presensi.cetakLaporanExel', compact('bulan','tahun', 'namaBulan', 'karyawan', 'presensi'));
+            }
 
         return view('presensi.cetakLaporan', compact('bulan','tahun', 'namaBulan', 'karyawan', 'presensi'));
     }
@@ -419,6 +431,16 @@ class PresensiController extends Controller
             ->groupByRaw('presensi.nik, nama_lengkap')
             ->get();
 
+            if(isset($_POST['exportExel'])){
+                $time = date("d-m-Y H:i:s");
+
+                //fungsi header dengan mengirim raw data exel
+                header("Content-type: application/vnd-ms-excel");
+
+                //mendefinisikan nama file yang di ekspor
+                header("Content-Disposition: attachment; filename=Rekap Presensi  $time.xlsx");
+            }
+
         return view('presensi.cetakRekap', compact('rekap', 'tahun', 'bulan', 'namaBulan'));    
     }
 
@@ -448,7 +470,7 @@ class PresensiController extends Controller
             $query -> where('status_approved', $request -> status_approved);
         }
 
-        $dataIzinSakit = $query -> paginate(2);
+        $dataIzinSakit = $query -> paginate(10);
         $dataIzinSakit -> appends($request-> all());
             
 

@@ -71,7 +71,7 @@
                                         <div class="col-4">
                                             <div class="form-group">
                                                 <select name="kode_departemen" id="kode_departemen" class="form-select">
-                                                    <option value="">Departemen</option>
+                                                    <option value="">Semua Departemen</option>
                                                     @foreach($departemen as $item)
                                                         <option {{ Request ('kode_departemen') == $item -> kode_departemen ? 'selected' : ''}} 
                                                             value="{{ $item -> kode_departemen }}">
@@ -268,10 +268,10 @@
 
                 <div class="row">
                     <div class="col-12">
-                        <select name="kode_departemen" id="kode_departemen" class="form-select">
+                        <select name="kode_departemen1" id="kode_departemen1" class="form-select">
                             <option value="">Departemen</option>
                             @foreach($departemen as $item)
-                                <option {{ Request ('kode_departemen') == $item -> kode_departemen ? 'selected' : ''}} 
+                                <option {{ Request ('kode_departemen1') == $item -> kode_departemen ? 'selected' : ''}} 
                                     value="{{ $item -> kode_departemen }}">
                                         {{ $item -> nama_departemen }}
                                 </option>
@@ -378,7 +378,7 @@
                 var nama_lengkap = $("#nama_lengkap").val();
                 var jabatan = $("#jabatan").val();
                 var no_hp = $("#no_hp").val();
-                var kode_departemen = $("formKaryawan").find("#kode_departemen").val();
+                var kode_departemen = $("#kode_departemen1").val();
 
                 if(nik == ""){
                     Swal.fire({
@@ -387,7 +387,7 @@
                         icon: 'warning',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
-                        $("#nik").focus();
+                        $("#nama_lengkap").focus();
                     });
                     
                     return false;
@@ -399,7 +399,7 @@
                         icon: 'warning',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
-                        $("#nik").focus();
+                        $("#nama_lengkap").focus();
                     });
 
                     return false;
@@ -411,7 +411,7 @@
                         icon: 'warning',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
-                        $("#nik").focus();
+                        $("#jabatan").focus();
                     });
 
                     return false;
@@ -423,7 +423,7 @@
                         icon: 'warning',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
-                        $("#nik").focus();
+                        $("#no_hp").focus();
                     });
 
                     return false;
@@ -435,7 +435,7 @@
                         icon: 'warning',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
-                        $("#nik").focus();
+                        $("#kode_departemen").focus();
                     });
 
                     return false;
