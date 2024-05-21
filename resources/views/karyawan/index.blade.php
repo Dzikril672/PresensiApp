@@ -59,6 +59,7 @@
 
                         <div class="row mt-2">
                             <div class="col-12">
+                                
                                 <form action="/karyawan" method="GET">
                                     <div class="row">
                                         <div class="col-6">
@@ -96,8 +97,10 @@
                                                 </button>
                                             </div>
                                         </div>
+
                                     </div>
                                 </form>
+
                             </div>
                         </div>
                         
