@@ -88,9 +88,9 @@
             </td>
             <td>
                 <span id="title">
-                    LAPORAN PRESENSI KARYAWAN <br>
+                    LAPORAN PRESENSI ASISTEN <br>
                     PERIODE {{ strtoupper ($namaBulan[$bulan])}} {{ $tahun }} <br>
-                    SEIC LABORATORY <br>
+                    INFORMATION TECHNOLOGY CERTIFICATION CENTER <br>
                 </span>
                 <span>
                     <i>
@@ -108,7 +108,15 @@
                 @php
                     $path = Storage::url('uploads/karyawan/'. $karyawan->foto);
                 @endphp
-                <img src="{{ url ($path) }}" alt="foto" width="110px" height="130px">
+                <!-- <img src="{{ url ($path) }}" alt="foto" width="110px" height="130px"> -->
+                @if(!empty(Auth::guard('karyawan') -> user() -> foto))
+                    @php
+                        $path = Storage::url('uploads/karyawan/'.Auth::guard('karyawan') -> user() -> foto);
+                    @endphp
+                    <img src="{{url($path)}}" alt="foto" style="width=110px; height=130px;">
+                @else
+                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="foto" style="width=110px; height=130px;">
+                @endif
             </td>
         </tr>
         <tr>
@@ -213,11 +221,11 @@
         </tr>
         <tr>
             <td style="text-align: center; vertical-align: bottom;" height="120px">
-                <u>Daeng Dziha</u><br>
+                <u>Muhammad Zaid Al Khair</u><br>
                 <i><b>Koordinator Laboratorium</b></i>  
             </td>
             <td style="text-align: center; vertical-align: bottom;" height="120px">
-                <u>Dzikril Hakim</u><br>
+                <u>Hendra Jatnika</u><br>
                 <i><b>Kepala Laboratorium</b></i>  
             </td>  
         </tr>

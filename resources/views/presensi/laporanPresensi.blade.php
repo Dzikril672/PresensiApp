@@ -85,7 +85,7 @@
                                         </button>
                                     </div>
                                 </div>
-                                <div class="col-6">
+                                <!-- <div class="col-6">
                                     <div class="form-group">
                                         <button type="submit" name="exportExel" class="btn btn-success w-100">
                                             <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  
@@ -99,7 +99,7 @@
                                              Export to Exel
                                         </button>
                                     </div>
-                                </div>
+                                </div> -->
                             </div>
                         </form>
                     </div>

@@ -70,9 +70,9 @@ class PresensiController extends Controller
         $file = $folderPath . $fileName; //url file yang akan diupload
 
         //proses untuk data yang akan dikirim ketika absen pulang (update)
-        if($radius > $lokasi_kantor->radius){
-            echo "error|Maaf Anda Berada Di Luar Radius \n Jarak Anda " .$radius." meter dari kantor|radius";
-        } else{
+        // if($radius > $lokasi_kantor->radius){
+        //     echo "error|Maaf Anda Berada Di Luar Radius \n Jarak Anda " .$radius." meter dari kantor|radius";
+        // } else{
             if($cek > 0){
                 $data_pulang = [
                     'jam_keluar' => $jam,
@@ -87,25 +87,29 @@ class PresensiController extends Controller
                     echo "error|Maaf Gagal Absen, Silahkan Ulangi|out";
                 }
             } else {
-                //proses untuk data yang akan dikirim ketika absen masuk (insert)
-                $data = [
-                    'nik' => $nik,
-                    'tgl_presensi' => $tgl_presensi,
-                    'jam_masuk' => $jam,
-                    'foto_masuk' => $fileName,
-                    'lokasi_masuk' => $lokasi
-                ];
+                if($radius > $lokasi_kantor->radius){
+                    echo "error|Maaf Anda Berada Di Luar Radius \n Jarak Anda " .$radius." meter dari kantor|radius";
+                } else {
+                    //proses untuk data yang akan dikirim ketika absen masuk (insert)
+                    $data = [
+                        'nik' => $nik,
+                        'tgl_presensi' => $tgl_presensi,
+                        'jam_masuk' => $jam,
+                        'foto_masuk' => $fileName,
+                        'lokasi_masuk' => $lokasi
+                    ];
 
-                //fungsi untuk menyimpan data ke tabel presensi dari variabel $data
-                $simpan = DB::table('presensi')->insert($data);
-                if($simpan){
-                    Storage::put($file, $imageDecode);
-                    echo "success|Terima Kasih, Selamat Bekerja|in";
-                }else{
-                    echo "error|Maaf Gagal Absen, Silahkan Ulangi|in";
+                    //fungsi untuk menyimpan data ke tabel presensi dari variabel $data
+                    $simpan = DB::table('presensi')->insert($data);
+                    if($simpan){
+                        Storage::put($file, $imageDecode);
+                        echo "success|Terima Kasih, Selamat Bekerja|in";
+                    }else{
+                        echo "error|Maaf Gagal Absen, Silahkan Ulangi|in";
+                    }
                 }
             }
-        }
+        // }
     }
 
     //menghitung jarak koordinat antara posisi kantor yang ditentukan dengan koordinat user

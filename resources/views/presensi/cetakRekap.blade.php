@@ -74,9 +74,9 @@
             </td>
             <td>
                 <span id="title">
-                    REKAP PRESENSI KARYAWAN <br>
+                    REKAP PRESENSI ASISTEN <br>
                     PERIODE {{ strtoupper ($namaBulan[$bulan])}} {{ $tahun }} <br>
-                    SEIC LABORATORY <br>
+                    INFORMATION TECHNOLOGY CERTIFICATION CENTER <br>
                 </span>
                 <span>
                     <i>
@@ -150,11 +150,11 @@
         </tr>
         <tr>
             <td style="text-align: center; vertical-align: bottom;" height="120px">
-                <u>Daeng Dziha</u><br>
+                <u>Muhammad Zaid Al Khair</u><br>
                 <i><b>Koordinator Laboratorium</b></i>  
             </td>
             <td style="text-align: center; vertical-align: bottom;" height="120px">
-                <u>Dzikril Hakim</u><br>
+                <u>Hendra Jatnika</u><br>
                 <i><b>Kepala Laboratorium</b></i>  
             </td>  
         </tr>

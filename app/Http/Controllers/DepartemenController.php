@@ -30,7 +30,7 @@ class DepartemenController extends Controller
 
     public function store(Request $request){
         $kode_departemen = $request->kode_departemen;
-        $nama_departemen = $request->nama_departemen;
+        $nama_departemen = $request->nama_departemen1;
 
         $data = [
             'kode_departemen' => $kode_departemen,

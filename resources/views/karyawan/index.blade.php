@@ -372,7 +372,7 @@
                         form.submit();
                         Swal.fire("Deleted!", "", "success");
                     }
-});
+            });
 
             });
 
@@ -438,7 +438,7 @@
                         icon: 'warning',
                         confirmButtonText: 'Ok'
                     }).then((result) => {
-                        $("#kode_departemen").focus();
+                        $("#kode_departemen1").focus();
                     });
 
                     return false;

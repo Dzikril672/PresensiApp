@@ -38,7 +38,7 @@ class KaryawanController extends Controller
         $nama_lengkap = $request -> nama_lengkap;
         $jabatan = $request -> jabatan;
         $no_hp = $request -> no_hp;
-        $kode_departemen = $request -> kode_departemen;
+        $kode_departemen = $request -> kode_departemen1;
         $password = Hash::make('12345');
 
         //cek data karyawan
@@ -63,6 +63,8 @@ class KaryawanController extends Controller
                 'password' => $password
             ];
 
+            
+
             $simpan = DB::table('karyawan')->insert($data);
             if($simpan){
                 if($request -> hasFile('foto')){
@@ -85,7 +87,7 @@ class KaryawanController extends Controller
 
         $departemen = DB::table('departemen')-> get();
         $karyawan = DB::table('karyawan')
-            ->where('nik', $nik)
+            ->where('nik', $nik)    
             ->first();
 
         return view('karyawan.formEdit', compact('departemen', 'karyawan'));

@@ -51,9 +51,9 @@
 
         <!-- pengondisian keterlambatan -->
         <td>
-            @if ($item -> jam_masuk >= '07:00')
+            @if ($item -> jam_masuk >= '08:30')
                 @php
-                    $jamTerlambat = selisih('07:00:00', $item -> jam_masuk);
+                    $jamTerlambat = selisih('08:30:00', $item -> jam_masuk);
                 @endphp
                 <span class="badge bg-danger" style="color: white;" >Terlambat <br>
                 {{ $jamTerlambat }}</span>
