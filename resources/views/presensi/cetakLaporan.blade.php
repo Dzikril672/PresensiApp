@@ -106,17 +106,9 @@
         <tr>
             <td rowspan="6" style="padding-top: 8px;">
                 @php
-                    $path = Storage::url('uploads/karyawan/'. $karyawan->foto);
+                    $path = !empty($karyawan->foto) ? Storage::url('uploads/karyawan/' . $karyawan->foto) : 'assets/img/sample/avatar/avatar1.jpg';
                 @endphp
-                <!-- <img src="{{ url ($path) }}" alt="foto" width="110px" height="130px"> -->
-                @if(!empty(Auth::guard('karyawan') -> user() -> foto))
-                    @php
-                        $path = Storage::url('uploads/karyawan/'.Auth::guard('karyawan') -> user() -> foto);
-                    @endphp
-                    <img src="{{url($path)}}" alt="foto" style="width=110px; height=130px;">
-                @else
-                    <img src="assets/img/sample/avatar/avatar1.jpg" alt="foto" style="width=110px; height=130px;">
-                @endif
+                <img src="{{ url($path) }}" alt="foto" width="110px" height="130px">
             </td>
         </tr>
         <tr>
